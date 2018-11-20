@@ -63,6 +63,7 @@ public class FloatingActionButton extends ImageButton {
     private int mColorRipple;
     private Drawable mIcon;
     private int mIconSize = Util.dpToPx(getContext(), 24f);
+    private int mIconCustomSize;
     private Animation mShowAnimation;
     private Animation mHideAnimation;
     private String mLabelText;
@@ -138,6 +139,7 @@ public class FloatingActionButton extends ImageButton {
         mProgressMax = attr.getInt(R.styleable.FloatingActionButton_fab_progress_max, mProgressMax);
         mShowProgressBackground = attr.getBoolean(R.styleable.FloatingActionButton_fab_progress_showBackground, true);
         mBarCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_custom_size, NOT_SET);
+        mIconCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_icon_size, NOT_SET);
 
         if (attr.hasValue(R.styleable.FloatingActionButton_fab_progress)) {
             mProgress = attr.getInt(R.styleable.FloatingActionButton_fab_progress, 0);
@@ -370,6 +372,9 @@ public class FloatingActionButton extends ImageButton {
         int iconSize = -1;
         if (getIconDrawable() != null) {
             iconSize = Math.max(getIconDrawable().getIntrinsicWidth(), getIconDrawable().getIntrinsicHeight());
+            if (mIconCustomSize > 0) {
+                iconSize = mIconCustomSize;
+            }
         }
         int iconOffset = (getCircleSize() - (iconSize > 0 ? iconSize : mIconSize)) / 2;
         int circleInsetHorizontal = hasShadow() ? mShadowRadius + Math.abs(mShadowXOffset) : 0;
@@ -400,6 +405,7 @@ public class FloatingActionButton extends ImageButton {
 
     protected Drawable getIconDrawable() {
         if (mIcon != null) {
+            //if (mIconCustomSize > 0) mIcon = Util.scaleDrawable(mIcon, mIconCustomSize);
             return mIcon;
         } else {
             return new ColorDrawable(Color.TRANSPARENT);
@@ -802,7 +808,7 @@ public class FloatingActionButton extends ImageButton {
     @Override
     public void setImageDrawable(Drawable drawable) {
         if (mIcon != drawable) {
-            mIcon = drawable;
+                mIcon = drawable;
             updateBackground();
         }
     }
@@ -811,7 +817,7 @@ public class FloatingActionButton extends ImageButton {
     public void setImageResource(int resId) {
         Drawable drawable = getResources().getDrawable(resId);
         if (mIcon != drawable) {
-            mIcon = drawable;
+                mIcon = drawable;
             updateBackground();
         }
     }

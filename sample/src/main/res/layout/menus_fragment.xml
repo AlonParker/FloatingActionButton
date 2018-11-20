@@ -100,14 +100,17 @@
             style="@style/MenuButtonsSmall.Green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            fab:fab_icon_size="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/userpic_pro"
             fab:fab_label="Menu item 1" />
 
         <com.github.clans.fab.FloatingActionButton
             style="@style/MenuButtonsSmall.Green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            fab:fab_icon_size="40dp"
+            android:src="@drawable/userpic_pro"
             fab:fab_label="Menu item 2" />
 
         <com.github.clans.fab.FloatingActionButton

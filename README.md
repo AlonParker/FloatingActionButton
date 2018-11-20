@@ -77,6 +77,7 @@ Here are all the **FloatingActionButton**'s xml attributes with their **default 
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/your_icon_drawable"
+        app:fab_icon_size = "40dp"
         app:fab_colorNormal="#DA4336"
         app:fab_colorPressed="#E75043"
         app:fab_colorRipple="#99FFFFFF"

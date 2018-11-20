@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +97,7 @@ public class FloatingActionMenu extends ViewGroup {
     private boolean mIsSetClosedOnTouchOutside;
     private int mOpenDirection;
     private OnMenuToggleListener mToggleListener;
+    private OnMenuBeforeToggleListener mBeforeToggleListener;
     private int mMenuFabCustomSize;
 
     private ValueAnimator mShowBackgroundAnimator;
@@ -111,6 +111,10 @@ public class FloatingActionMenu extends ViewGroup {
 
     public interface OnMenuToggleListener {
         void onMenuToggle(boolean opened);
+    }
+
+    public interface OnMenuBeforeToggleListener {
+        void onMenuBeforeToggle(boolean open);
     }
 
     public FloatingActionMenu(Context context) {
@@ -621,8 +625,10 @@ public class FloatingActionMenu extends ViewGroup {
 
     public void toggle(boolean animate) {
         if (isOpened()) {
+            if (mBeforeToggleListener != null) mBeforeToggleListener.onMenuBeforeToggle(false);
             close(animate);
         } else {
+            if (mBeforeToggleListener != null) mBeforeToggleListener.onMenuBeforeToggle(true);
             open(animate);
         }
     }
@@ -782,6 +788,10 @@ public class FloatingActionMenu extends ViewGroup {
 
     public void setOnMenuToggleListener(OnMenuToggleListener listener) {
         mToggleListener = listener;
+    }
+
+    public void setOnMenuBeforeToggleListener(OnMenuBeforeToggleListener listener) {
+        mBeforeToggleListener = listener;
     }
 
     public void setIconAnimated(boolean animated) {
@@ -990,7 +1000,7 @@ public class FloatingActionMenu extends ViewGroup {
 
     public void removeAllMenuButtons() {
         close(true);
-        
+
         List<FloatingActionButton> viewsToRemove = new ArrayList<>();
         for (int i = 0; i < getChildCount(); i++) {
             View v = getChildAt(i);
