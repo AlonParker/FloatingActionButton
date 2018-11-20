@@ -188,7 +188,7 @@ public class FloatingActionButton extends ImageButton {
             circleSize = getResources().getDimensionPixelSize(mFabSize == SIZE_NORMAL
                     ? R.dimen.fab_size_normal : R.dimen.fab_size_mini);
         } else {
-            circleSize = Util.dpToPx(getContext(), mBarCustomSize);
+            circleSize = mBarCustomSize;
         }
         return circleSize;
     }
@@ -405,7 +405,6 @@ public class FloatingActionButton extends ImageButton {
 
     protected Drawable getIconDrawable() {
         if (mIcon != null) {
-            //if (mIconCustomSize > 0) mIcon = Util.scaleDrawable(mIcon, mIconCustomSize);
             return mIcon;
         } else {
             return new ColorDrawable(Color.TRANSPARENT);

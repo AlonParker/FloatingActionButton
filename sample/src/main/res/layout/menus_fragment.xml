@@ -44,7 +44,7 @@
         fab:menu_colorNormal="#FFB805"
         fab:menu_colorPressed="#F2AB00"
         fab:menu_colorRipple="#D99200"
-        fab:menu_fab_custom_size="10dp"
+        fab:menu_fab_custom_size="28dp"
         fab:menu_labels_hideAnimation="@anim/jump_to_down"
         fab:menu_labels_showAnimation="@anim/jump_from_down"
         fab:menu_labels_style="@style/MenuLabelsStyle"
