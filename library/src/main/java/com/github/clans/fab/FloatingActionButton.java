@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Outline;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
@@ -41,7 +42,10 @@ public class FloatingActionButton extends ImageButton {
     public static final int SIZE_NORMAL = 0;
     public static final int SIZE_MINI = 1;
 
+    public static final int NOT_SET = -1;
+
     int mFabSize;
+    int mBarCustomSize;
     boolean mShowShadow;
     int mShadowColor;
     int mShadowRadius = Util.dpToPx(getContext(), 4f);
@@ -133,6 +137,7 @@ public class FloatingActionButton extends ImageButton {
         mProgressBackgroundColor = attr.getColor(R.styleable.FloatingActionButton_fab_progress_backgroundColor, 0x4D000000);
         mProgressMax = attr.getInt(R.styleable.FloatingActionButton_fab_progress_max, mProgressMax);
         mShowProgressBackground = attr.getBoolean(R.styleable.FloatingActionButton_fab_progress_showBackground, true);
+        mBarCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_custom_size, NOT_SET);
 
         if (attr.hasValue(R.styleable.FloatingActionButton_fab_progress)) {
             mProgress = attr.getInt(R.styleable.FloatingActionButton_fab_progress, 0);
@@ -176,8 +181,14 @@ public class FloatingActionButton extends ImageButton {
     }
 
     private int getCircleSize() {
-        return getResources().getDimensionPixelSize(mFabSize == SIZE_NORMAL
-                ? R.dimen.fab_size_normal : R.dimen.fab_size_mini);
+        int circleSize;
+        if (mBarCustomSize == NOT_SET) {
+            circleSize = getResources().getDimensionPixelSize(mFabSize == SIZE_NORMAL
+                    ? R.dimen.fab_size_normal : R.dimen.fab_size_mini);
+        } else {
+            circleSize = Util.dpToPx(getContext(), mBarCustomSize);
+        }
+        return circleSize;
     }
 
     private int calculateMeasuredWidth() {
@@ -712,7 +723,7 @@ public class FloatingActionButton extends ImageButton {
 
         @Override
         public int getOpacity() {
-            return 0;
+            return PixelFormat.UNKNOWN;
         }
     }
 

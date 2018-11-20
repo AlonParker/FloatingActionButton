@@ -41,6 +41,8 @@ public class FloatingActionMenu extends ViewGroup {
     private static final int LABELS_POSITION_LEFT = 0;
     private static final int LABELS_POSITION_RIGHT = 1;
 
+    public static final int NOT_SET = -1;
+
     private AnimatorSet mOpenAnimatorSet = new AnimatorSet();
     private AnimatorSet mCloseAnimatorSet = new AnimatorSet();
     private AnimatorSet mIconToggleSet;
@@ -96,6 +98,7 @@ public class FloatingActionMenu extends ViewGroup {
     private boolean mIsSetClosedOnTouchOutside;
     private int mOpenDirection;
     private OnMenuToggleListener mToggleListener;
+    private int mMenuFabCustomSize;
 
     private ValueAnimator mShowBackgroundAnimator;
     private ValueAnimator mHideBackgroundAnimator;
@@ -164,6 +167,7 @@ public class FloatingActionMenu extends ViewGroup {
         mLabelsEllipsize = attr.getInt(R.styleable.FloatingActionMenu_menu_labels_ellipsize, 0);
         mLabelsMaxLines = attr.getInt(R.styleable.FloatingActionMenu_menu_labels_maxLines, -1);
         mMenuFabSize = attr.getInt(R.styleable.FloatingActionMenu_menu_fab_size, FloatingActionButton.SIZE_NORMAL);
+        mMenuFabCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionMenu_menu_fab_custom_size, NOT_SET);
         mLabelsStyle = attr.getResourceId(R.styleable.FloatingActionMenu_menu_labels_style, 0);
         String customFont = attr.getString(R.styleable.FloatingActionMenu_menu_labels_customFont);
         try {
@@ -257,6 +261,7 @@ public class FloatingActionMenu extends ViewGroup {
         mMenuButton.setColors(mMenuColorNormal, mMenuColorPressed, mMenuColorRipple);
         mMenuButton.mShadowColor = mMenuShadowColor;
         mMenuButton.mFabSize = mMenuFabSize;
+        mMenuButton.mBarCustomSize = mMenuFabCustomSize;
         mMenuButton.updateBackground();
         mMenuButton.setLabelText(mMenuLabelText);
 
