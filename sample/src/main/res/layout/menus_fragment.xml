@@ -55,7 +55,7 @@
             style="@style/MenuButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_close"
             fab:fab_custom_size="10dp"
             fab:fab_label="Menu item 1" />
 
@@ -64,7 +64,7 @@
             style="@style/MenuButtonsStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/calendar_other"
             fab:fab_label="Menu item 2" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -91,7 +91,7 @@
         fab:menu_colorNormal="#43A047"
         fab:menu_colorPressed="#2E7D32"
         fab:menu_colorRipple="#1B5E20"
-        fab:menu_fab_custom_size="10dp"
+        fab:menu_fab_custom_size="40dp"
         fab:menu_icon="@drawable/ic_star"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_maxLines="2">

@@ -369,14 +369,24 @@ public class FloatingActionButton extends ImageButton {
             });
         }
 
-        int iconSize = -1;
+        int iconSizeVertical = -1;
+        int iconSizeHorizontal = -1;
         if (getIconDrawable() != null) {
-            iconSize = Math.max(getIconDrawable().getIntrinsicWidth(), getIconDrawable().getIntrinsicHeight());
+            iconSizeVertical = getIconDrawable().getIntrinsicHeight();
+            iconSizeHorizontal = getIconDrawable().getIntrinsicWidth();
             if (mIconCustomSize > 0) {
-                iconSize = mIconCustomSize;
+               if (iconSizeVertical >= iconSizeHorizontal) {
+                   iconSizeVertical = mIconCustomSize;
+                   iconSizeHorizontal = mIconCustomSize * iconSizeHorizontal/iconSizeVertical;
+               } else {
+                   iconSizeHorizontal = mIconCustomSize;
+                   iconSizeVertical = mIconCustomSize * iconSizeVertical/iconSizeHorizontal;
+               }
             }
         }
-        int iconOffset = (getCircleSize() - (iconSize > 0 ? iconSize : mIconSize)) / 2;
+
+        int iconOffsetVertical = (getCircleSize() - (iconSizeVertical > 0 ? iconSizeVertical : mIconSize)) / 2;
+        int iconOffsetHorizontal = (getCircleSize() - (iconSizeHorizontal > 0 ? iconSizeHorizontal : mIconSize)) / 2;
         int circleInsetHorizontal = hasShadow() ? mShadowRadius + Math.abs(mShadowXOffset) : 0;
         int circleInsetVertical = hasShadow() ? mShadowRadius + Math.abs(mShadowYOffset) : 0;
 
@@ -394,10 +404,10 @@ public class FloatingActionButton extends ImageButton {
         );*/
         layerDrawable.setLayerInset(
                 hasShadow() ? 2 : 1,
-                circleInsetHorizontal + iconOffset,
-                circleInsetVertical + iconOffset,
-                circleInsetHorizontal + iconOffset,
-                circleInsetVertical + iconOffset
+                circleInsetHorizontal + iconOffsetHorizontal,
+                circleInsetVertical + iconOffsetVertical,
+                circleInsetHorizontal + iconOffsetHorizontal,
+                circleInsetVertical + iconOffsetVertical
         );
 
         setBackgroundCompat(layerDrawable);
