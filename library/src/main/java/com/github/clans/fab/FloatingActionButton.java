@@ -376,11 +376,11 @@ public class FloatingActionButton extends ImageButton {
             iconSizeHorizontal = getIconDrawable().getIntrinsicWidth();
             if (mIconCustomSize > 0) {
                if (iconSizeVertical >= iconSizeHorizontal) {
-                   iconSizeVertical = mIconCustomSize;
                    iconSizeHorizontal = mIconCustomSize * iconSizeHorizontal/iconSizeVertical;
+                   iconSizeVertical = mIconCustomSize;
                } else {
-                   iconSizeHorizontal = mIconCustomSize;
                    iconSizeVertical = mIconCustomSize * iconSizeVertical/iconSizeHorizontal;
+                   iconSizeHorizontal = mIconCustomSize;
                }
             }
         }
