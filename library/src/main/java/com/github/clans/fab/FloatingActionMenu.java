@@ -27,6 +27,8 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.clans.fab.FloatingActionButton.UNDEFINED_ICON_COLOR;
+
 public class FloatingActionMenu extends ViewGroup {
 
     private static final int ANIMATION_DURATION = 300;
@@ -77,6 +79,7 @@ public class FloatingActionMenu extends ViewGroup {
     private int mMenuColorPressed;
     private int mMenuColorRipple;
     private Drawable mIcon;
+    private int mMenuFabIconTint;
     private int mAnimationDelayPerItem;
     private Interpolator mOpenInterpolator;
     private Interpolator mCloseInterpolator;
@@ -172,6 +175,7 @@ public class FloatingActionMenu extends ViewGroup {
         mLabelsMaxLines = attr.getInt(R.styleable.FloatingActionMenu_menu_labels_maxLines, -1);
         mMenuFabSize = attr.getInt(R.styleable.FloatingActionMenu_menu_fab_size, FloatingActionButton.SIZE_NORMAL);
         mMenuFabCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionMenu_menu_fab_custom_size, NOT_SET);
+        mMenuFabIconTint = attr.getColor(R.styleable.FloatingActionMenu_menu_fab_icon_tint, UNDEFINED_ICON_COLOR);
         mLabelsStyle = attr.getResourceId(R.styleable.FloatingActionMenu_menu_labels_style, 0);
         String customFont = attr.getString(R.styleable.FloatingActionMenu_menu_labels_customFont);
         try {
@@ -270,6 +274,11 @@ public class FloatingActionMenu extends ViewGroup {
         mMenuButton.setLabelText(mMenuLabelText);
 
         mImageToggle = new ImageView(getContext());
+
+        if (mMenuFabIconTint != UNDEFINED_ICON_COLOR) {
+            mIcon.setTint(mMenuFabIconTint);
+        }
+
         mImageToggle.setImageDrawable(mIcon);
 
         addView(mMenuButton, super.generateDefaultLayoutParams());

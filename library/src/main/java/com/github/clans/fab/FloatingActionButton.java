@@ -44,6 +44,8 @@ public class FloatingActionButton extends ImageButton {
 
     public static final int NOT_SET = -1;
 
+    static final int UNDEFINED_ICON_COLOR = 0;
+
     int mFabSize;
     int mBarCustomSize;
     boolean mShowShadow;
@@ -64,6 +66,7 @@ public class FloatingActionButton extends ImageButton {
     private Drawable mIcon;
     private int mIconSize = Util.dpToPx(getContext(), 24f);
     private int mIconCustomSize;
+    private int mIconTint;
     private Animation mShowAnimation;
     private Animation mHideAnimation;
     private String mLabelText;
@@ -140,6 +143,7 @@ public class FloatingActionButton extends ImageButton {
         mShowProgressBackground = attr.getBoolean(R.styleable.FloatingActionButton_fab_progress_showBackground, true);
         mBarCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_custom_size, NOT_SET);
         mIconCustomSize = attr.getDimensionPixelSize(R.styleable.FloatingActionButton_fab_icon_size, NOT_SET);
+        mIconTint = attr.getColor(R.styleable.FloatingActionButton_fab_icon_tint, UNDEFINED_ICON_COLOR);
 
         if (attr.hasValue(R.styleable.FloatingActionButton_fab_progress)) {
             mProgress = attr.getInt(R.styleable.FloatingActionButton_fab_progress, 0);
@@ -375,13 +379,13 @@ public class FloatingActionButton extends ImageButton {
             iconSizeVertical = getIconDrawable().getIntrinsicHeight();
             iconSizeHorizontal = getIconDrawable().getIntrinsicWidth();
             if (mIconCustomSize > 0) {
-               if (iconSizeVertical >= iconSizeHorizontal) {
-                   iconSizeHorizontal = mIconCustomSize * iconSizeHorizontal/iconSizeVertical;
-                   iconSizeVertical = mIconCustomSize;
-               } else {
-                   iconSizeVertical = mIconCustomSize * iconSizeVertical/iconSizeHorizontal;
-                   iconSizeHorizontal = mIconCustomSize;
-               }
+                if (iconSizeVertical >= iconSizeHorizontal) {
+                    iconSizeHorizontal = mIconCustomSize * iconSizeHorizontal / iconSizeVertical;
+                    iconSizeVertical = mIconCustomSize;
+                } else {
+                    iconSizeVertical = mIconCustomSize * iconSizeVertical / iconSizeHorizontal;
+                    iconSizeHorizontal = mIconCustomSize;
+                }
             }
         }
 
@@ -415,6 +419,9 @@ public class FloatingActionButton extends ImageButton {
 
     protected Drawable getIconDrawable() {
         if (mIcon != null) {
+            if (mIconTint != UNDEFINED_ICON_COLOR) {
+                mIcon.setTint(mIconTint);
+            }
             return mIcon;
         } else {
             return new ColorDrawable(Color.TRANSPARENT);
@@ -578,16 +585,9 @@ public class FloatingActionButton extends ImageButton {
             int action = event.getAction();
             switch (action) {
                 case MotionEvent.ACTION_UP:
-                    if (label != null) {
-                        label.onActionUp();
-                    }
-                    onActionUp();
-                    break;
 
                 case MotionEvent.ACTION_CANCEL:
-                    if (label != null) {
-                        label.onActionUp();
-                    }
+                    label.onActionUp();
                     onActionUp();
                     break;
             }
@@ -817,7 +817,7 @@ public class FloatingActionButton extends ImageButton {
     @Override
     public void setImageDrawable(Drawable drawable) {
         if (mIcon != drawable) {
-                mIcon = drawable;
+            mIcon = drawable;
             updateBackground();
         }
     }
@@ -826,7 +826,7 @@ public class FloatingActionButton extends ImageButton {
     public void setImageResource(int resId) {
         Drawable drawable = getResources().getDrawable(resId);
         if (mIcon != drawable) {
-                mIcon = drawable;
+            mIcon = drawable;
             updateBackground();
         }
     }
