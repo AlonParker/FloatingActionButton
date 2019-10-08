@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_close"
             fab:fab_custom_size="10dp"
+            fab:fab_icon_tint="@color/app_primary"
             fab:fab_label="Menu item 1" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -100,17 +101,17 @@
             style="@style/MenuButtonsSmall.Green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon_size="50dp"
             android:scaleType="fitCenter"
             android:src="@drawable/userpic_pro"
+            fab:fab_icon_size="50dp"
             fab:fab_label="Menu item 1" />
 
         <com.github.clans.fab.FloatingActionButton
             style="@style/MenuButtonsSmall.Green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            fab:fab_icon_size="40dp"
             android:src="@drawable/userpic_pro"
+            fab:fab_icon_size="40dp"
             fab:fab_label="Menu item 2" />
 
         <com.github.clans.fab.FloatingActionButton
@@ -149,7 +150,8 @@
             style="@style/MenuButtonsSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_star" />
+            android:src="@drawable/ic_star"
+            fab:fab_icon_tint="@color/app_primary_dark" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab34"
@@ -203,6 +205,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_edit"
+            fab:fab_icon_tint="@color/cardview_dark_background"
             fab:fab_label="Menu item 2"
             fab:fab_size="mini" />
 
@@ -225,6 +228,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         fab:menu_backgroundColor="#ccffffff"
+        fab:menu_fab_icon_tint="@color/cardview_dark_background"
         fab:menu_fab_label="Menu label"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true">
@@ -242,6 +246,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_edit"
+            fab:fab_icon_tint="@color/design_default_color_primary"
             fab:fab_label="Remove button"
             fab:fab_size="mini" />
 
